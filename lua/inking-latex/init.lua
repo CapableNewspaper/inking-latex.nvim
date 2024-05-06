@@ -80,7 +80,9 @@ function M.PrintFigure(fileName)
   local current_win = vim.api.nvim_get_current_win()
   local cursor = vim.api.nvim_win_get_cursor(current_win)
   local current_line = cursor[1]
-  local relative_path = M.removeFinalDirectory(vim.fn.expand('%:.'))
+  local relpath = vim.fn.expand('%:.')
+  local bufname = vim.fn.expand('%')
+  local relative_path = string.sub(relpath,1,-1 -string.len(bufname))
   -- Set the new text for the entire buffer
   local my_text ={
       '\\begin{figure}[h]',
