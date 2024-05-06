@@ -70,8 +70,6 @@ function M.CreateFigure()
 
   local newFileName= vim.fn.input("Enter the name for the new file (no extension): ") .. ".svg"
 
-  M.CreateOpenFile(template,newFileName)
-
   local buf = vim.api.nvim_get_current_buf()
 
   local current_win = vim.api.nvim_get_current_win()
@@ -86,7 +84,10 @@ function M.CreateFigure()
       '\\end{figure}'
     }
   vim.api.nvim_buf_set_lines(buf, current_line-1, current_line,  false, my_text)
-end
+
+  M.CreateOpenFile(template,newFileName)
+
+  end
 
 return M
 
