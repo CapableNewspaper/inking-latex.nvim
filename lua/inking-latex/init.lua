@@ -6,23 +6,13 @@ local func = require("inking-latex.functions")
 local working_directory = vim.fn.getcwd()
 local template = working_directory .."/figures/template.svg"
 
--- function M.CreateFigure()
---   io.write("Enter the name for the new file (no extension): ")
---   local newFileName = io.read() .. ".svg"
---   func.CreateOpenFile(template,newFileName)
---
---   func.PrintFigure(newFileName)
---
--- end
-
-vim.keymap.set('n','<leader>k', function()
+function M.CreateFigure()
   io.write("Enter the name for the new file (no extension): ")
   local newFileName = io.read() .. ".svg"
   func.CreateOpenFile(template,newFileName)
 
   func.PrintFigure(newFileName)
 end
-)
 
-vim.keymap.set('n','<leader>m',print('do you load??'))
 return M
+
