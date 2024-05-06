@@ -72,6 +72,20 @@ function M.CreateFigure()
 
   M.CreateOpenFile(template,newFileName)
 
+  local buf = vim.api.nvim_get_current_buf()
+
+  local current_win = vim.api.nvim_get_current_win()
+  local cursor = vim.api.nvim_win_get_cursor(current_win)
+  local current_line = cursor[1]
+  -- Set the new text for the entire buffer
+  local my_text ={
+      '\\begin{figure}[h]',
+      '   \\includesvg[width=0.8\\textwidth]{'..M.RelativePath()..newFileName..'}',
+      '   \\caption{}',
+      '   \\label{fig:'..string.sub(newFileName,1,-5)..'}',
+      '\\end{figure}'
+    }
+  vim.api.nvim_buf_set_lines(buf, current_line-1, current_line,  false, my_text)
 end
 
 return M
