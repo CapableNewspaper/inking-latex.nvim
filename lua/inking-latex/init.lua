@@ -15,4 +15,5 @@ function M.CreateFigure()
 
 end
 
+vim.keymap.set('n','<leader>if', M.CreateFigure())
 return M
