@@ -57,6 +57,8 @@ function M.PrintFigure(fileName)
       '\\begin{figure}[h]',
       '    \\centering',
       '    \\includesvg[width=0.8\\textwidth]{'.. fileName ..'}',
+      '    \\caption{}',
+      '    \\label{fig:'..string.sub(fileName,1,-5)..'}',
       '\\end{figure}'
     }
   vim.api.nvim_buf_set_lines(buf, current_line-1, current_line,  false, my_text)
@@ -71,7 +73,7 @@ function M.CreateFigure()
   local newFileName= vim.fn.input("Enter the name for the new file (no extension): ") .. ".svg"
 
   M.CreateOpenFile(template,newFileName)
-  M.PrintFigure(string.sub(newFileName,1,-5))
+  M.PrintFigure(newFileName)
   end
 
 return M
