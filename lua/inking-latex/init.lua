@@ -23,4 +23,6 @@ vim.keymap.set('n','<leader>k', function()
   func.PrintFigure(newFileName)
 end
 )
+
+vim.keymap.set('n','<leader>m',print('do you load??'))
 return M
