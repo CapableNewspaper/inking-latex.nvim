@@ -87,7 +87,7 @@ function M.PrintFigure(fileName)
   local my_text ={
       '\\begin{figure}[h]',
       '    \\centering',
-      '    \\includesvg[width=0.8\\textwidth]{'..relative_path.. fileName ..'}',
+      '    \\includesvg[width=0.8\\textwidth]{'..relative_path..'figures/' fileName ..'}',
       '    \\caption{}',
       '    \\label{fig:'..string.sub(fileName,1,-5)..'}',
       '\\end{figure}'
