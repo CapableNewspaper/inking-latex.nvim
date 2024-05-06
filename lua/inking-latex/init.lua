@@ -29,22 +29,33 @@ function M.CreateOpenFile(template,newFileName)
   M.OpenFile(newFile)
 end
 
+-- function M.RelativePath()
+--   -- Get the name of the current buffer
+--   local buffer_name = vim.api.nvim_buf_get_name(0)
+--
+--   -- Get the directory of the current buffer
+--   local buffer_directory = vim.fn.fnamemodify(buffer_name, ":h")
+--
+--   -- Get the current working directory
+--   local working_directory = vim.fn.getcwd()
+--
+--   -- Calculate the relative path
+--   local relative_path = vim.fn.relpath(buffer_directory, working_directory)
+--
+--   return relative_path
+-- end
+
 function M.RelativePath()
-  -- Get the name of the current buffer
-  local buffer_name = vim.api.nvim_buf_get_name(0)
+-- Get the full path of the buffer
+local buffer_path = vim.fn.expand('%:p')
 
-  -- Get the directory of the current buffer
-  local buffer_directory = vim.fn.fnamemodify(buffer_name, ":h")
+-- Get the current working directory
+local current_directory = vim.fn.getcwd()
 
-  -- Get the current working directory
-  local working_directory = vim.fn.getcwd()
-
-  -- Calculate the relative path
-  local relative_path = vim.fn.relpath(buffer_directory, working_directory)
-
-  return relative_path
+-- Compute the relative path
+local relative_path = vim.fn.fnamemodify(buffer_path, ":~:" .. current_directory)
+return relative_path
 end
-
 function M.PrintFigure(fileName)
   local buf = vim.api.nvim_get_current_buf()
 
