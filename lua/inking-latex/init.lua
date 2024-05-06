@@ -73,13 +73,7 @@ function M.removeFinalDirectory(path)
     end
 end
 
-function M.GetRelativePath()
-  local relpath = vim.fn.expand('%:.')
-  local bufname = vim.fn.expand('%')
-  local relative_path = string.sub(relpath,1,-1 -string.len(bufname))
-  return relative_path
 
-end
 
 function M.PrintFigure(fileName)
   local buf = vim.api.nvim_get_current_buf()
@@ -88,9 +82,12 @@ function M.PrintFigure(fileName)
   local cursor = vim.api.nvim_win_get_cursor(current_win)
   local current_line = cursor[1]
 
-  local relative_path = M.GetRelativePath()
-  print(vim.fn.expand('%:.'))
-  print(vim.fn.expand('%:.'))
+  local relpath = vim.fn.expand('%:.')
+  local bufname = vim.fn.expand('%')
+  local relative_path = string.sub(relpath,1,-1 -string.len(bufname))
+
+  print(relpath)
+  print(bufname)
   print(relative_path)
 
     -- Set the new text for the entire buffer
