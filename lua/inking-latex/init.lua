@@ -51,12 +51,13 @@ function M.PrintFigure(fileName)
   local current_win = vim.api.nvim_get_current_win()
   local cursor = vim.api.nvim_win_get_cursor(current_win)
   local current_line = cursor[1]
+  local relative_path = M.RelativePath()
   print(current_line)
   -- Set the new text for the entire buffer
   local my_text ={
       '\\begin{figure}[h]',
       '    \\centering',
-      '    \\includesvg[width=0.8\\textwidth]{'.. fileName ..'}',
+      '    \\includesvg[width=0.8\\textwidth]{'..relative_path.. fileName ..'}',
       '    \\caption{}',
       '    \\label{fig:'..string.sub(fileName,1,-5)..'}',
       '\\end{figure}'
