@@ -47,23 +47,40 @@ end
 
 function M.RelativePath()
 -- Get the full path of the buffer
-local buffer_path = vim.fn.expand('%:p')
+local buffer_path = vim.api.nvim_buf_get_name(0)
+
+-- Extract the directory portion of the buffer's path
+local buffer_directory = vim.fn.fnamemodify(buffer_path, ':h')
 
 -- Get the current working directory
-local current_directory = vim.fn.getcwd()
+local working_directory = vim.fn.getcwd()
 
 -- Compute the relative path
-local relative_path = vim.fn.fnamemodify(buffer_path, ":~:" .. current_directory)
-return relative_path
+local relative_path = vim.fn.fnamemodify(buffer_directory, ':~:.') -- Compute the relative path
 end
+
+
+function M.removeFinalDirectory(path)
+    -- Find the last directory separator
+    local lastSeparator = path:match(".+[/\\]([^/\\]+)$")
+
+    if lastSeparator then
+        -- Remove the last directory and the separator
+        return path:sub(1, -(#lastSeparator + 2))
+    else
+        -- If no directory separator is found, return the input path
+        return path
+    end
+end
+
+
 function M.PrintFigure(fileName)
   local buf = vim.api.nvim_get_current_buf()
 
   local current_win = vim.api.nvim_get_current_win()
   local cursor = vim.api.nvim_win_get_cursor(current_win)
   local current_line = cursor[1]
-  local relative_path = M.RelativePath()
-  print(current_line)
+  local relative_path = M.removeFinalDirectory(vim.fn.expand('%:.'))
   -- Set the new text for the entire buffer
   local my_text ={
       '\\begin{figure}[h]',
