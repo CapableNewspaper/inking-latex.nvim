@@ -80,6 +80,7 @@ function M.GetRelativePath()
   return relative_path
 
 end
+
 function M.PrintFigure(fileName)
   local buf = vim.api.nvim_get_current_buf()
 
@@ -88,7 +89,7 @@ function M.PrintFigure(fileName)
   local current_line = cursor[1]
 
   local relative_path = M.GetRelativePath()
-  print(vim.fn.expand('%:.'))
+  print({vim.fn.expand('%:.'), vim.fn.expand('%'), relative_path})
     -- Set the new text for the entire buffer
   local my_text ={
       '\\begin{figure}[h]',
