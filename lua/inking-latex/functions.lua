@@ -1,5 +1,14 @@
 local M ={}
 
+function M.CreateFile(template,filename)
+  -- os.execute("cp \"" .. template .. " " .. filename)
+  os.execute("cp ".. template .. " "  .. filename )
+end
+
+function M.OpenFile(file)
+  os.execute("open " .. file)
+end
+
 function M.CreateOpenFile(template,newFileName)
   -- Get the name of the current buffer
   local current_buffer_name = vim.api.nvim_buf_get_name(0)
@@ -11,10 +20,10 @@ function M.CreateOpenFile(template,newFileName)
   local newFile = current_directory .."/figures/" .. newFileName
 
   -- Create a new file based on a template
-  CreateFile(template, newFile)
+  M.CreateFile(template, newFile)
 
   -- Open the new file
-  OpenFile(newFile)
+  M.OpenFile(newFile)
 end
 
 function M.RelativePath()
